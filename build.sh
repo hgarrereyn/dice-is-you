@@ -17,3 +17,8 @@ cp ./static/* public
 cp build/app.wasm public/app.wasm
 cp build/app.js public/app.js
 cp build/app.data public/app.data
+
+# Build to /docs also so we can serve with gh-pages.
+rm -rf ./docs
+mkdir docs
+cp public/* docs
