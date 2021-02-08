@@ -1,0 +1,60 @@
+<html>
+    <head></head>
+    <body>
+        <div id='game_container'>
+            <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+        </div>
+
+        <style>
+            #game_container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: rgb(52, 73, 94);
+            }
+
+            #canvas {
+                max-width: 100%;
+                max-height: 100%;
+
+                image-rendering: optimizeSpeed;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: optimize-contrast;
+                image-rendering: pixelated;
+                -ms-interpolation-mode: nearest-neighbor;
+            }
+
+            @media (orientation: landscape) { #canvas { height:100%; } }
+            @media (orientation: portrait) { #canvas { width:100%; } }
+        </style>
+
+        <script>
+            var Module = {
+                preRun: [],
+                postRun: [],
+                print: console.log,
+                printErr: console.error,
+                canvas: (function() {
+                    var canvas = document.getElementById('canvas');
+
+                    // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+                    // application robust, you may want to override this behavior before shipping!
+                    // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+                    canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+                    return canvas;
+                })(),
+                setStatus: function() {}
+            };
+
+        </script>
+        <script async type="text/javascript" src="app.js"></script>
+    </body>
+</html>
